@@ -74,7 +74,7 @@ export async function login(req, res) {
 
         const user = await User.findOne({email});
 
-        if(!user) return res.status(401).json({messae: "Invalid email or password"});
+        if(!user) return res.status(401).json({message: "User does not exist"});
 
         const isPasswordCorrect = await user.matchPassword(password);
 
