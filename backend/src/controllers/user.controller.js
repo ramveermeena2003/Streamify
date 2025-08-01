@@ -14,7 +14,7 @@ export async function getRecommendedUsers(req, res) {
             ]
         });
 
-        res.status(200).json({ success: true, recommendedUsers });
+        res.status(200).json(recommendedUsers);
     } catch (error) {
         console.log("Error in getRecommendedUsers controller", error.message);
         res.status(500).json({ message: "Internal Server Error" });
@@ -134,7 +134,7 @@ export async function getFriendRequests(req,res){
             status : "accpet",
         }).populate("recipient", "fullName profilePic");
 
-        res.status(200).json(incomingReqs, accpetedReqs);
+        res.status(200).json({incomingReqs, accpetedReqs});
     } catch (error) {
         console.log("Error in getFriendRequests controller",error.message);
         res.status(500).json({message : "Internal Server Error"});
