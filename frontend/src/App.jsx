@@ -13,6 +13,7 @@ import PageLoader from './components/PageLoader.jsx'
 import useAuthUser from './hooks/useAuthUser.js'
 import Layout from './components/Layout.jsx'
 import { useThemeStore } from './store/useThemeStore.js'
+import FriendPage from './pages/FriendPage.jsx'
 
 const App = () => {
 
@@ -49,15 +50,26 @@ const App = () => {
           <Navigate to= {
             !isAuthenticated ? "/login" : "/onboarding"}/>
         )}/>
+
+        <Route path='/friends' element={isAuthenticated && isOnboarded ? (
+          <Layout showSidebar={true}>
+            <FriendPage/>
+          </Layout>
+        ) : (
+          <Navigate to= {
+            !isAuthenticated ? "/login" : "/onboarding"}/>
+        )}/>
         
         <Route path='/call/:id' element={isAuthenticated && isOnboarded ? (
-          <CallPage/>
+          <Layout showSidebar={false}>
+            <CallPage/>
+          </Layout>
         ) : (
           <Navigate to={!isAuthenticated ? "/login" : "/onboarding"}/>
         )}/>
         
         <Route path='/chat/:id' element = {isAuthenticated && isOnboarded ? (
-          <Layout showSidebar={false}>
+          <Layout showSidebar={true}>
             <ChatPage/>
           </Layout>
         ) : (
